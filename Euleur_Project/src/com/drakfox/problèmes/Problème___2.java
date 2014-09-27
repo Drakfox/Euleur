@@ -1,4 +1,4 @@
-package com.drakfox.problème___2;
+package com.drakfox.problèmes;
 
 import java.util.ArrayList;
 

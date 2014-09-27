@@ -1,6 +1,6 @@
 package com.drakfox.main;
 
-import com.drakfox.problème___2.Problème___2;
+import com.drakfox.problèmes.Problème___2;
 
 public class Main {
 	
