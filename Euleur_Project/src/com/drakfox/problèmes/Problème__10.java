@@ -5,45 +5,74 @@ import java.util.ArrayList;
 public class Problème__10 {
 	
 	public static int Length = 2_000_000;
+	public static int sqrLength = (int) Math.sqrt(Length);
 	public static ArrayList<Integer> PrimeNumber = new ArrayList<Integer>();
+	public static int[] nombre = new int[Length+1];
 	
 	public Problème__10()
 	{
-		PrimeNumber.add(2);
+		nombre[0] = 1;
+		nombre[1] = 1;
 		
-		for(int i = 3; i < Length; i++)
-		{
-			boolean isNombrePremier = true;
+		int nextPrime = 2;
+		
+		while(nextPrime <= sqrLength)
+		{	
+			boolean haveToContinue = true;
+			int iterator = 2;
+			int multiple = 1;
 			
-			for(int j = 0; j < PrimeNumber.size() && isNombrePremier; j++)
+			while(haveToContinue)
 			{
-				float Nombre = ((float)i)/((float)PrimeNumber.get(j));
-				
-				if(Float.compare(Nombre, (float)Math.floor((double)Nombre)) == 0)
+				multiple = nextPrime*iterator;
+				if(multiple <= Length)
 				{
-					isNombrePremier = false;
+					nombre[multiple] = 1;
+					iterator++;
+				}
+				else
+				{
+					haveToContinue = false;
 				}
 			}
-			if(isNombrePremier)
+			
+			nextPrime = findNextPrime(nextPrime);
+		}
+		
+		Long somme = 0L;
+		
+		for(int i = 0; i  <= Length; i++)
+		{
+			if(nombre[i] == 0)
 			{
-				PrimeNumber.add(i);
+				if(i >= 1400 && i <= 2000)
+				{
+					System.out.println(i);
+				}
+				somme = somme + i;
 			}
 		}
-		int somme = 0;
 		
-		for(int i = 0 ; i < PrimeNumber.size(); i++)
-		{
-			somme = PrimeNumber.get(i) + somme;
-		}
-		
-
 		System.out.println(somme);
 		
 	}
 	
-	public static void main(String[] arg0)
+	public static int findNextPrime(int nextPrime)
 	{
-		new Problème__10();
+		boolean found = false;
+		int iterator = nextPrime+1;
+		while(!found)
+		{
+			if(nombre[iterator] == 0)
+			{
+				found = true;
+			}
+			else
+			{
+				iterator++;
+			}
+		}
+		
+		return iterator;
 	}
-
 }
